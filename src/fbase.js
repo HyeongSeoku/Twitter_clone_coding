@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -9,4 +10,8 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID,
   };
 
- export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+export const authService = firebase.auth();
+
+//모든것을 export 하는 대신 firebase.auth() 서비스만 export
