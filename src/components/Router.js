@@ -12,18 +12,18 @@ const AppRouter = ({ isLoggedIn }) => {
       <Switch>
         {isLoggedIn ? (
           <>
-            <Router exact path="/">
+            <Route exact path="/">
               <Home />
-            </Router>
-            <Router exact path="/profile">
+            </Route>
+            <Route exact path="/profile">
               <Profile />
-            </Router>
+            </Route>
           </> //Fragment 묶고싶을때 사용 div 등을 사용하고 싶지 않고 그냥 묶고만 싶을때
         ) : (
           <>
-            <Router exact path="/">
+            <Route exact path="/">
               <Auth />
-            </Router>
+            </Route>
           </>
         )}
       </Switch>
