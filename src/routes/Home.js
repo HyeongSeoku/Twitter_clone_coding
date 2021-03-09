@@ -8,8 +8,8 @@ const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
 
   useEffect(() => {
-    dbService.collection("nweets").onSnapshot((snapshot) => {
-      //onSnapshot = DB변화가 있을시 실행 (실시간)
+    dbService.collection("nweets").orderBy("createdAt","desc").onSnapshot((snapshot) => {
+      //onSnapshot = DB변화가 있을시 실행 (실시간)  /orderBy("createdAt","desc") = 날짜 내림차순 정렬
       const nweetArray = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -48,7 +48,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <Nweet key={nweet.id} nweetObj={nweet} />
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>

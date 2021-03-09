@@ -1,10 +1,14 @@
 import React from "react";
 
-const Nweet = ({ nweetObj }) => (
+const Nweet = ({ nweetObj, isOwner }) => (
   <div>
     <h4>{nweetObj.text}</h4>
-    <button>Delete Nweet</button>
-    <button>Edite Nweet</button>
+    {isOwner && (
+      <>
+        <button>Delete Nweet</button>
+        <button>Edite Nweet</button>
+      </>
+    )}
   </div>
 );
 
