@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import Nweet from "./Nweet";
 
-const Home = () => {
+const Home = ({ userObj }) => {
+  //Router.js 를 통해 App.js로 부터온 userObj (로그인한 유저 정보)
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const getNweets = async () => {
-    const dbNweets = await dbService.collection("nweets").get();
-    dbNweets.forEach((document) => {
-      const nweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setNweets((prev) => [nweetObject, ...prev]); //[current document data , 이전 데이터] 이전 데이터 들을 붙여씀
-    });
-  };
+
   useEffect(() => {
-    getNweets();
+    dbService.collection("nweets").onSnapshot((snapshot) => {
+      //onSnapshot = DB변화가 있을시 실행 (실시간)
+      const nweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNweets(nweetArray);
+    });
   }, []);
   const onSubmit = async (event) => {
     //collection("nweets").add({})의 add가 promise를 리턴하기때문에 async 사용
     event.preventDefault();
     dbService.collection("nweets").add({
-      nweet: nweet,
+      text: nweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setNweet(""); //submit하고 나선 다시 빈 입력창
   };
@@ -45,11 +46,9 @@ const Home = () => {
         />
         <input type="submit" value="Nweet" />
       </form>
-      <div key={nweet.id}>
+      <div>
         {nweets.map((nweet) => (
-          <div>
-            <h3>{nweet.nweet}</h3>
-          </div>
+          <Nweet key={nweet.id} nweetObj={nweet} />
         ))}
       </div>
     </div>
