@@ -8,7 +8,7 @@ const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
 
   useEffect(() => {
-    dbService.collection("nweets").orderBy("createdAt","desc").onSnapshot((snapshot) => {
+    dbService.collection("feeds").orderBy("createdAt","desc").onSnapshot((snapshot) => {
       //onSnapshot = DB변화가 있을시 실행 (실시간)  /orderBy("createdAt","desc") = 날짜 내림차순 정렬
       const nweetArray = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -20,7 +20,7 @@ const Home = ({ userObj }) => {
   const onSubmit = async (event) => {
     //collection("nweets").add({})의 add가 promise를 리턴하기때문에 async 사용
     event.preventDefault();
-    dbService.collection("nweets").add({
+    dbService.collection("feeds").add({
       text: nweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
