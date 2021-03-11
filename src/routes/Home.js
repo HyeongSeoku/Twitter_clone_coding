@@ -8,14 +8,17 @@ const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
 
   useEffect(() => {
-    dbService.collection("feeds").orderBy("createdAt","desc").onSnapshot((snapshot) => {
-      //onSnapshot = DB변화가 있을시 실행 (실시간)  /orderBy("createdAt","desc") = 날짜 내림차순 정렬
-      const nweetArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setNweets(nweetArray);
-    });
+    dbService
+      .collection("feeds")
+      .orderBy("createdAt", "desc")
+      .onSnapshot((snapshot) => {
+        //onSnapshot = DB변화가 있을시 실행 (실시간)  /orderBy("createdAt","desc") = 날짜 내림차순 정렬
+        const nweetArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setNweets(nweetArray);
+      });
   }, []);
   const onSubmit = async (event) => {
     //collection("nweets").add({})의 add가 promise를 리턴하기때문에 async 사용
@@ -34,6 +37,17 @@ const Home = ({ userObj }) => {
     } = event;
     setNweet(value);
   };
+  const onFileChange = (event) => {
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0] ;    //파일
+    const reader = new FileReader();  //reader 생성
+    reader.onloadend=(finishedEvent)=>{
+      console.log(finishedEvent);
+    }
+    reader.readAsDataURL(theFile);    //readAsDataURL을 이용해서 파일(theFile) 읽음
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -44,6 +58,7 @@ const Home = ({ userObj }) => {
           placeholder="What's on your mind"
           maxLength={120}
         />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Nweet" />
       </form>
       <div>
