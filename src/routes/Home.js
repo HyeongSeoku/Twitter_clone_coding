@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { dbService ,storageService} from "fbase";
+import { dbService, storageService } from "fbase";
 import Nweet from "./Nweet";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   //Router.js 를 통해 App.js로 부터온 userObj (로그인한 유저 정보)
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   useEffect(() => {
     dbService
       .collection("feeds")
@@ -24,18 +24,26 @@ const Home = ({ userObj }) => {
   const onSubmit = async (event) => {
     //collection("nweets").add({})의 add가 promise를 리턴하기때문에 async 사용
     event.preventDefault();
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
-    const response = await fileRef.putString(attachment,"data_url");
-    console.log(response);
-    /*dbService.collection("feeds").add({
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+
+    const nweetObj = {
       text: nweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
-    });
-    setNweet(""); //submit하고 나선 다시 빈 입력창
-  */
-  };
+      attachmentUrl,
+    };
 
+    await dbService.collection("feeds").add(nweetObj);
+    setNweet(""); //submit하고 나선 다시 빈 입력창
+    setAttachment(""); //파일 선택 빈공간으로 초기화
+  };
 
   const onChange = (event) => {
     const {
@@ -57,9 +65,9 @@ const Home = ({ userObj }) => {
     };
     reader.readAsDataURL(theFile); //readAsDataURL을 이용해서 파일(theFile) 읽음
   };
-  const onFileClear =()=>{
-    setAttachment(null);
-  }
+  const onFileClear = () => {
+    setAttachment("");
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -74,9 +82,9 @@ const Home = ({ userObj }) => {
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
-        <img src={attachment} width="100px" height="100px" />
-        <button onClick={onFileClear}>Clear</button>
-        </div>
+            <img src={attachment} width="100px" height="100px" />
+            <button onClick={onFileClear}>Clear</button>
+          </div>
         )}
       </form>
       <div>
