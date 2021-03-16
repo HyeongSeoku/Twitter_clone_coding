@@ -8,7 +8,7 @@ import Navigation from "./Navigation";
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj}/>}
       <Switch>
         {isLoggedIn ? (
           <>
@@ -16,7 +16,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
               <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userObj={userObj} />
             </Route>
           </> //Fragment 묶고싶을때 사용 div 등을 사용하고 싶지 않고 그냥 묶고만 싶을때
         ) : (
