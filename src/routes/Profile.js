@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-export default ({ userObj }) => {
+export default ({ userObj,refreshUser }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const [profilePhoto, setProfilePhoto] = useState(userObj.photoURL);
-  const [newProfilePhoto, setNewProfilePhoto] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState(userObj.photoURL); //사용자의 프로필 사진을 보여주기 위해
+  const [newProfilePhoto, setNewProfilePhoto] = useState("");   //파일 선택시 미리보기 위해서
   const history = useHistory();
   const onLogOutClick = () => {
     authService.signOut();
@@ -67,8 +67,7 @@ export default ({ userObj }) => {
       userName: newDisplayName,
       profilePhotoUrl,
     };
-    //await dbService.collection("profile").add(profileObj);
-    console.log(userObj.displayName, userObj.photoURL);
+    refreshUser(authService.currentUser.displayName);
   };
 
   /*const getMyFeeds = async () => {
