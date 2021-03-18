@@ -1,3 +1,5 @@
+import { faPlug, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authService, dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -11,6 +13,7 @@ export default ({ userObj,refreshUser }) => {
   const onLogOutClick = () => {
     authService.signOut();
     history.push("/");
+    refreshUser()
   };
 
   const onFileChange = (event) => {
@@ -70,36 +73,32 @@ export default ({ userObj,refreshUser }) => {
     refreshUser(authService.currentUser.displayName);
   };
 
-  /*const getMyFeeds = async () => {
-    const feeds = await dbService
-      .collection("feeds")
-      .where("creatorId", "==", userObj.uid)
-      .orderBy("createdAt", "desc")
-      .get();
-    console.log(feeds.docs.map((doc) => doc.data()));
-    console.log(userObj.displayName);
-  };
-
-  useEffect(() => {
-    getMyFeeds();
-  }, []);
-  */
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input
+    <div className="container">
+              <div>프로필사진</div>
+        <img src={profilePhoto} width="100px" height="100px" />
+      <form onSubmit={onSubmit} className="profileForm">
+        <input 
           onChange={onChange}
           type="text"
+          autoFocus
           placeholder="Display Name"
           value={newDisplayName}
+          className="formInput"
         />
-        <br />
-        <div>프로필사진</div>
-        <img src={profilePhoto} width="100px" height="100px" />
-        <br/>
         <>
-          <input type="file" accept="image/*" onChange={onFileChange} />
+        <label for="attach-file" className="profileInput__label">
+        <span>Add Photos</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
+      <input
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{ opacity: 0 }}
+      />
           {newProfilePhoto && (
             <div>
               <div>미리보기</div>
@@ -109,10 +108,18 @@ export default ({ userObj,refreshUser }) => {
             </div>
           )}
         </>
-        <input type="submit" value="Update Profile" />
+        <input
+          type="submit"
+          value="Update Profile"
+          className="formBtn"
+          style={{
+            marginTop: 10,
+          }}
+          />
       </form>
-
-      <button onClick={onLogOutClick}>Log Out</button>
-    </>
+      <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+        Log Out
+      </span>
+    </div>
   );
 };
