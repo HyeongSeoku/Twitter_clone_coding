@@ -76,8 +76,8 @@ export default ({ userObj,refreshUser }) => {
 
   return (
     <div className="container">
-              <div>프로필사진</div>
-        <img src={profilePhoto} width="100px" height="100px" />
+      <div className="profile_container">
+        <img src={profilePhoto} width="100px" height="100px" className="profilePhoto" />
       <form onSubmit={onSubmit} className="profileForm">
         <input 
           onChange={onChange}
@@ -89,7 +89,7 @@ export default ({ userObj,refreshUser }) => {
         />
         <>
         <label for="attach-file" className="profileInput__label">
-        <span>Add Photos</span>
+        <span>Fix ProfileImage</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
       <input
@@ -100,11 +100,11 @@ export default ({ userObj,refreshUser }) => {
         style={{ opacity: 0 }}
       />
           {newProfilePhoto && (
-            <div>
-              <div>미리보기</div>
-              <img src={newProfilePhoto} width="100px" height="100px" />
+            <div className="preview_container ">
+              <span className="profile_load">미리보기</span>
+              <img className="profileImg__load" src={newProfilePhoto} width="100px" height="100px" />
               <br></br>
-              <button onClick={onFileClear}>Clear</button>
+              <button className="fileClearBtn" onClick={onFileClear}>Cancel</button>
             </div>
           )}
         </>
@@ -117,6 +117,7 @@ export default ({ userObj,refreshUser }) => {
           }}
           />
       </form>
+      </div>
       <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
         Log Out
       </span>
