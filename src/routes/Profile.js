@@ -66,10 +66,6 @@ export default ({ userObj,refreshUser }) => {
       });
       window.alert("Updated!");
     }
-    const profileObj = {
-      userName: newDisplayName,
-      profilePhotoUrl,
-    };
     refreshUser(authService.currentUser.displayName);
   };
 

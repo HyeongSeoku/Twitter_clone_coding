@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner }) => {
+const Nweet = ({ nweetObj, isOwner , userObj }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
   const onDeleteClick = async () => {
@@ -22,6 +22,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     await dbService.doc(`feeds/${nweetObj.id}`).update({
         text:newNweet,
         updatedAt:Date.now(),
+        creatorName:userObj.displayName,
     });
     setEditing(false);
   };
@@ -31,6 +32,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
     } = event;
     setNewNweet(value);
   };
+
+  const createdTime = new Date(nweetObj.createdAt);
   return (
     <div className="feed">
       {editing ? (
@@ -50,20 +53,29 @@ const Nweet = ({ nweetObj, isOwner }) => {
         </>
       ) : (
         <>
+        <div className="feed_container">
+          <img src={nweetObj.creatorProfileImg} className="feed_userProfile_Img"/>
+          <span className="feed_userName">{nweetObj.creatorName}</span>
           <h4>{nweetObj.text}</h4>
           {nweetObj.attachmentUrl &&
-            <img src={nweetObj.attachmentUrl} />
+            <img src={nweetObj.attachmentUrl} className="feed_UploadImage" />
           }
           {isOwner && (
             <div className="feed__actions">
-              <span onClick={onDeleteClick}>Delete Nweet
+              <span onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faTrash}/>
               </span>
-              <span onClick={toggleEditing}>Edite Nweet
+              <span onClick={toggleEditing}>
                 <FontAwesomeIcon icon={faPencilAlt}/>
               </span>
             </div>
           )}
+          <span className="feed_createdTime">{createdTime.getDate()+
+          "/"+(createdTime.getMonth()+1)+
+          "/"+createdTime.getFullYear()+
+          " "+createdTime.getHours()+
+          ":"+createdTime.getMinutes()}</span>
+          </div>
         </>
       )}
     </div>

@@ -27,6 +27,8 @@ const FeedFactory = ({ userObj }) => {
       text: nweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      creatorName:userObj.displayName,
+      creatorProfileImg:userObj.photoURL,
       attachmentUrl,
     };
 
@@ -72,7 +74,7 @@ const FeedFactory = ({ userObj }) => {
         />
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
-      <label for="attach-file" className="factoryInput__label">
+      <label htmlFor="attach-file" className="factoryInput__label">
         <span>Add Photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
@@ -87,7 +89,7 @@ const FeedFactory = ({ userObj }) => {
         <div className="factoryForm__attachment">
           <img src={attachment} style={{backgroundImage:attachment}}/>
           <button className="factoryForm_clear" onClick={onFileClear}>
-            <span>Remove</span>
+            <span>Remove </span>
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>

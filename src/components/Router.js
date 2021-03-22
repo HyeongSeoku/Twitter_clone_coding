@@ -11,6 +11,7 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
     <Router>
       {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
+        <>
         {isLoggedIn ? (
           <div
             style={{
@@ -36,6 +37,7 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
             </Route>
           </>
         )}
+        </>
       </Switch>
     </Router>
   );

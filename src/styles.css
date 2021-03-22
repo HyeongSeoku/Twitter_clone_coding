@@ -126,7 +126,7 @@ input {
   .preview_container{
     align-items: center;
   }
-  /* Nwitter Factory */
+  /* feed Factory */
 
 .factoryForm {
     display: flex;
@@ -142,6 +142,7 @@ input {
     flex-wrap: wrap;
     position: relative;
     margin-bottom: 20px;
+    margin-top: 20px;
     width: 100%;
   }
 
@@ -201,12 +202,32 @@ input {
     font-size: 12px;
   }
   
-  /* Nweet */
+  /* Feed */
+  
+  .feed_container{
+    display: flex;
+    flex-direction: column;
+  }
 
   .feedEdit .formBtn {
     cursor: pointer;
     margin-top: 15px;
     margin-bottom: 5px;
+  }
+  
+  .feed_userName{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    font-size: 12px;
+    display: inline-flex;
+  }
+  
+  .feed_userProfile_Img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
   }
   
   .feed {
@@ -226,14 +247,15 @@ input {
     font-size: 14px;
   }
   
-  .feed img {
-    right: -10px;
-    top: 20px;
-    position: absolute;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+  .feed_UploadImage {
+    align-items: center;
+    top: 10px;
+    position: relative;
+    border-radius: 25%;
+    width: 100px;
+    height: 100px;
     margin-top: 10px;
+    align-self: center;
   }
   
   .feed__actions {
@@ -248,6 +270,12 @@ input {
   
   .feed__actions span:first-child {
     margin-right: 10px;
+  }
+
+  .feed_createdTime{
+    margin-top: 20px;
+    font-size: 10px;
+    align-self:flex-end;
   }
   
   /* Auth */
