@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/HyeongSeoku/Twitter_clone_coding/static/css/main.c32552b6.chunk.css",
-    "main.js": "/HyeongSeoku/Twitter_clone_coding/static/js/main.58af302c.chunk.js",
-    "main.js.map": "/HyeongSeoku/Twitter_clone_coding/static/js/main.58af302c.chunk.js.map",
-    "runtime-main.js": "/HyeongSeoku/Twitter_clone_coding/static/js/runtime-main.00280461.js",
-    "runtime-main.js.map": "/HyeongSeoku/Twitter_clone_coding/static/js/runtime-main.00280461.js.map",
-    "static/js/2.a2ec9ff7.chunk.js": "/HyeongSeoku/Twitter_clone_coding/static/js/2.a2ec9ff7.chunk.js",
-    "static/js/2.a2ec9ff7.chunk.js.map": "/HyeongSeoku/Twitter_clone_coding/static/js/2.a2ec9ff7.chunk.js.map",
-    "index.html": "/HyeongSeoku/Twitter_clone_coding/index.html",
-    "static/css/main.c32552b6.chunk.css.map": "/HyeongSeoku/Twitter_clone_coding/static/css/main.c32552b6.chunk.css.map",
-    "static/js/2.a2ec9ff7.chunk.js.LICENSE.txt": "/HyeongSeoku/Twitter_clone_coding/static/js/2.a2ec9ff7.chunk.js.LICENSE.txt"
+    "main.css": "/Twitter_clone_coding/static/css/main.c32552b6.chunk.css",
+    "main.js": "/Twitter_clone_coding/static/js/main.58af302c.chunk.js",
+    "main.js.map": "/Twitter_clone_coding/static/js/main.58af302c.chunk.js.map",
+    "runtime-main.js": "/Twitter_clone_coding/static/js/runtime-main.cafe176a.js",
+    "runtime-main.js.map": "/Twitter_clone_coding/static/js/runtime-main.cafe176a.js.map",
+    "static/js/2.cf96d8c3.chunk.js": "/Twitter_clone_coding/static/js/2.cf96d8c3.chunk.js",
+    "static/js/2.cf96d8c3.chunk.js.map": "/Twitter_clone_coding/static/js/2.cf96d8c3.chunk.js.map",
+    "index.html": "/Twitter_clone_coding/index.html",
+    "static/css/main.c32552b6.chunk.css.map": "/Twitter_clone_coding/static/css/main.c32552b6.chunk.css.map",
+    "static/js/2.cf96d8c3.chunk.js.LICENSE.txt": "/Twitter_clone_coding/static/js/2.cf96d8c3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.00280461.js",
-    "static/js/2.a2ec9ff7.chunk.js",
+    "static/js/runtime-main.cafe176a.js",
+    "static/js/2.cf96d8c3.chunk.js",
     "static/css/main.c32552b6.chunk.css",
     "static/js/main.58af302c.chunk.js"
   ]
