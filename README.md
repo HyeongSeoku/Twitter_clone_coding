@@ -1,4 +1,5 @@
 # 0. Run Project
+<img src="https://user-images.githubusercontent.com/48541850/130461340-8d443ec5-f1a5-46e6-b36b-095ac4d288d9.gif">
 
 
 # 1. Main Page
